@@ -1,0 +1,14 @@
+{{- if .Values.postgresql.persistence.enabled }}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: data-airflow-postgresql-0
+spec:
+  capacity:
+    storage: {{ .Values.postgresql.persistence.size | default "10Gi" }}
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: {{ .Values.postgresql.persistence.hostPath | default "/mnt/data/airflow-postgres" }}
+  persistentVolumeReclaimPolicy: Retain
+{{- end }}
