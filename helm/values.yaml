@@ -31,6 +31,12 @@ airflow:
       enabled: false
       size: 10Gi
       storageClassName: "standard"
+  
+  createUserJob:
+    useHelmHooks: false
+
+  migrateDatabaseJob:
+    useHelmHooks: false
     
     # SSH KEYS
     # Inject as env vars from the Secret
