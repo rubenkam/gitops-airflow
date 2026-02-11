@@ -38,40 +38,6 @@ airflow:
   migrateDatabaseJob:
     useHelmHooks: false
     
-    # SSH KEYS
-    # Inject as env vars from the Secret
-    # secret:
-    #   - envName: "AIRFLOW_VAR_UBUNTU_ID_RSA"
-    #     secretName: "demo-ssh-key"
-    #     secretKey: "id_rsa"
-
-    #   - envName: "AIRFLOW_CONN_UBUNTU_SSH_PRIVATE_KEY"
-    #     secretName: "demo-ssh-key"
-    #     secretKey: "id_rsa"
-
-    # env:
-    #   - name: AIRFLOW_VAR_UBUNTU_ID_RSA
-    #     value: "ssh://root@ubuntu-ssh:2222?key_file=%2Fopt%2Fairflow%2Fssh%2Fid_rsa"
-
-    #   - name: SSH_KNOWN_HOSTS_FILE
-    #     value: /opt/airflow/ssh/ssh_known_hosts
-      
-    # volumes:
-    #   - name: ssh-key-volume
-    #     secret:
-    #       secretName: demo-ssh-key
-    #       defaultMode: 0400
-      
-    #   - name: ssh-known-hosts-volume
-    #     configMap:
-    #       name: ssh-known-hosts
-    #       defaultmode: 0440
-    
-    # volumeMounts:
-    #   - name: ssh-key-volume
-    #     mountPath: /opt/airflow/ssh
-    #     readOnly: true
-
-    #   - name: ssh-known-hosts-volume
-    #     mountPath: /opt/airflow/ssh
-    #     readOnly: true
+  envFrom:
+    - secretRef:
+        name: airflow-runtime-connections
